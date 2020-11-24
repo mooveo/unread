@@ -14,7 +14,7 @@ module Unread
                 ON #{ReadMark.quoted_table_name}.readable_type  = '#{readable.class.readable_parent.name}'
                AND (#{ReadMark.quoted_table_name}.readable_id   = #{quote_bound_value(readable.id)} OR #{ReadMark.quoted_table_name}.readable_id IS NULL)
                AND #{ReadMark.quoted_table_name}.reader_id      = #{quoted_table_name}.#{quoted_primary_key}
-               AND #{ReadMark.quoted_table_name}.reader_type    = '#{connection.quote_string base_class.name}'
+               AND #{ReadMark.quoted_table_name}.reader_type    = '#{connection.quote_string name}'
                AND #{ReadMark.quoted_table_name}.timestamp     >= '#{connection.quoted_date readable.send(readable.class.readable_options[:on])}'"
       end
 

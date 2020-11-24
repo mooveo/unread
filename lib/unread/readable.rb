@@ -133,7 +133,7 @@ module Unread
           if unread?(reader)
             rm = read_mark(reader) || read_marks.build
             rm.reader_id   = reader.id
-            rm.reader_type = reader.class.base_class.name
+            rm.reader_type = reader.class.name
             rm.timestamp   = self.send(readable_options[:on])
             rm.save!
           end
@@ -143,12 +143,12 @@ module Unread
       private
 
       def read_mark(reader)
-        read_marks.where(reader_id: reader.id, reader_type: reader.class.base_class.name).first
+        read_marks.where(reader_id: reader.id, reader_type: reader.class.name).first
       end
 
       def read_mark_id_belongs_to?(reader)
         self.read_mark_reader_id.to_i == reader.id &&
-          self.read_mark_reader_type == reader.class.base_class.name
+          self.read_mark_reader_type == reader.class.name
       end
     end
   end
